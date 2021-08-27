@@ -1,0 +1,12 @@
+*{
+    font-family: 'Courier Prime', monospace;
+}
+
+.interaaciones{
+    float: inline-end;
+}
+
+.tituloCovid{
+    text-align: center;
+    padding-top: 45px;
+}

@@ -14,17 +14,17 @@ const grafico = () =>{
                 y:element.confirmed, label:element.location
             });
             //return confirmed;
-        })//de aqui hasta linea 71, proviene del grafico elegido en canvas.
+        })//de aqui hasta linea 90, proviene del grafico elegido en canvas.
         const muertos = casosConfirmados.map((element) => ({
             y:element.deaths, label:element.location
         }))
         
-        const tabla = casosConfirmados.map((element) => //para mostrar la tabla en el HTML y ocpuando la variable
+        const tabla = casosConfirmados.map((element) => //esto se agrego para mostrar la tabla en el HTML y ocpuando la variable
         `<tr>
             <td>${element.location}</td>
             <td>${element.confirmed}</td>
             <td>${element.deaths}</td>
-            <td>X</td>
+            <td><button type="button" class="btn btn-warning">Ver detalles</button></td>
         </tr>`
         ).join("")
 
@@ -74,7 +74,7 @@ const grafico = () =>{
                 legendText: "Casos muertos",
                 axisYType: "secondary",
                 showInLegend: true,
-                dataPoints: muertos//deberia ser de death, proveniente del arreglo data, en el json
+                dataPoints: muertos//del death, proveniente del arreglo data, en el json
             }]
         });
         chart.render();

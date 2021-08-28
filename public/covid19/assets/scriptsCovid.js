@@ -1,74 +1,85 @@
+const grafico = () =>{
+    fetch(`http://localhost:3000/api/total`)
+    .then(response =>{
+        return response.json();
+    })
+    .then(myJson =>{
+        let {data} = myJson;//el data es porque integra todos los datos por caracteristicas
+        let casosConfirmados = data.filter(element =>{
+            return element.confirmed > 1500000; //valores provenientes de la API, para que se muestre en el grafico
+        })
+        let confirmed = [];//el arreglo vacio de confirmed proveniente de data
+        casosConfirmados.forEach(element => {//recorre el element que contiene confirmed
+            confirmed.push({//para subir la informacion en el grafico
+                y:element.confirmed, label:element.location
+            });
+            //return confirmed;
+        })//de aqui hasta linea 71, proviene del grafico elegido en canvas.
+        const muertos = casosConfirmados.map((element) => ({
+            y:element.deaths, label:element.location
+        }))
 
-
-/*window.onload = function () {
-
-    var chart = new CanvasJS.Chart("chartContainer", {
-        animationEnabled: true,
-        title:{
-           
-        },	
-        axisY: {
-            title: "Casos muertos",
-            titleFontColor: "#4F81BC",
-            lineColor: "#4F81BC",
-            labelFontColor: "#4F81BC",
-            tickColor: "#4F81BC"
-        },
-        axisY2: {
-            title: "Casos confirmados",
-            titleFontColor: "#C0504E",
-            lineColor: "#C0504E",
-            labelFontColor: "#C0504E",
-            tickColor: "#C0504E"
-        },	
-        toolTip: {
-            shared: true
-        },
-        legend: {
-            cursor:"pointer",
-            verticalAlign: "top",
-            itemclick: toggleDataSeries
-        },
-        data: [{
-            type: "column",
-            name: "Proven Oil Reserves (bn)",
-            legendText: "Proven Oil Reserves",
-            showInLegend: true, 
-            dataPoints:[
-                { label: "Saudi", y: 266.21 },
-                { label: "Venezuela", y: 302.25 },
-                { label: "Iran", y: 157.20 },
-                { label: "Iraq", y: 148.77 },
-                { label: "Kuwait", y: 101.50 },
-                { label: "UAE", y: 97.8 }
-            ]
-        },
-        {
-            type: "column",	
-            name: "Oil Production (million/day)",
-            legendText: "Oil Production",
-            axisYType: "secondary",
-            showInLegend: true,
-            dataPoints:[
-                { label: "Saudi", y: 10.46 },
-                { label: "Venezuela", y: 2.27 },
-                { label: "Iran", y: 3.99 },
-                { label: "Iraq", y: 4.45 },
-                { label: "Kuwait", y: 2.92 },
-                { label: "UAE", y: 3.1 }
-            ]
-        }]
-    });
-    chart.render();
-    
-    function toggleDataSeries(e) {
-        if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-            e.dataSeries.visible = false;
-        }
-        else {
-            e.dataSeries.visible = true;
-        }
+        var chart = new CanvasJS.Chart("chartContainer", {
+            animationEnabled: true,
+            title:{
+               
+            },
+            axisX:{
+                labelAngle: -30,
+                interval: 1
+            },	
+            axisY: {
+                //title: "Casos confirmados",
+                titleFontColor: "#4F81BC",
+                lineColor: "#4F81BC",
+                labelFontColor: "#4F81BC",
+                tickColor: "#4F81BC"
+            },
+            axisY2: {
+                //title: "Casos muertos",
+                titleFontColor: "#C0504E",
+                lineColor: "#C0504E",
+                labelFontColor: "#C0504E",
+                tickColor: "#C0504E"
+            },	
+            toolTip: {
+                shared: true
+            },
+            legend: {
+                cursor:"pointer",
+                verticalAlign: "top",
+                itemclick: toggleDataSeries
+            },
+            data: [{
+                type: "column",
+                name: "Casos confirmados",
+                legendText: "Casos confirmados",
+                showInLegend: true, 
+                dataPoints: confirmed //se borro lo que contenia aqui, y se reemplaza por el arreglo data del json
+            },
+            {
+                type: "column",	
+                name: "Casos muertos",
+                legendText: "Casos muertos",
+                axisYType: "secondary",
+                showInLegend: true,
+                dataPoints: muertos//deberia ser de death, proveniente del arreglo data, en el json
+            }]
+        });
         chart.render();
-    }
-    
-    }*/ 
+
+        function toggleDataSeries(e) {
+            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+                e.dataSeries.visible = false;
+            }
+            else {
+                e.dataSeries.visible = true;
+            }
+            chart.render();
+        }
+    })
+};
+
+const initPandemia = (async () =>{
+    grafico();
+})();

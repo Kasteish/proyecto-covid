@@ -18,7 +18,18 @@ const grafico = () =>{
         const muertos = casosConfirmados.map((element) => ({
             y:element.deaths, label:element.location
         }))
+        
+        const tabla = casosConfirmados.map((element) => //para mostrar la tabla en el HTML y ocpuando la variable
+        `<tr>
+            <td>${element.location}</td>
+            <td>${element.confirmed}</td>
+            <td>${element.deaths}</td>
+            <td>X</td>
+        </tr>`
+        ).join("")
 
+        document.querySelector("#tablaDatos tbody").innerHTML = tabla
+        
         var chart = new CanvasJS.Chart("chartContainer", {
             animationEnabled: true,
             title:{
@@ -79,6 +90,8 @@ const grafico = () =>{
         }
     })
 };
+
+
 
 const initPandemia = (async () =>{
     grafico();

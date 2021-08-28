@@ -1,5 +1,6 @@
 *{
     font-family: 'Courier Prime', monospace;
+    text-align: center;
 }
 
 .interaaciones{
@@ -9,4 +10,23 @@
 .tituloCovid{
     text-align: center;
     padding-top: 45px;
+}
+
+.covin{
+    text-align: left;
+}
+
+table, th, td{
+    border: 1px solid grey;
+    border-collapse: collapse;
+    padding: 5px;
+}
+h3{
+    font-size: 33px;
+    margin-top: 3rem;
+}
+
+#tablaDatos{
+    margin: 2rem auto;
+    width: 70%;
 }

@@ -1,3 +1,57 @@
+const mostrarModal = (pais) => {
+    document.querySelector("#modal").classList.add("show");//el .classList.add("show") es quien abre ventana modal
+    document.querySelector("#contenidoDelModal").innerHTML = "";
+    //copiamos lo mismo que en el grafico, con algunos cambios.
+    fetch(`http://localhost:3000/api/countries/${pais}`)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(myJson){
+        let { data } = myJson;
+
+        var chart = new CanvasJS.Chart("contenidoDelModal", {
+        //exportEnabled: true,
+        animationEnabled: true,
+        title:{
+        text:`Datos de ${data.location}`
+      },
+      axisY: {
+        title: "Personas",
+        titleFontColor: "#4F81BC",
+        lineColor: "#4F81BC",
+        labelFontColor: "#4F81BC",
+        tickColor: "#4F81BC",
+        includeZero: true
+      },
+      toolTip: {
+        shared: true
+      },
+      legend: {
+        cursor: "pointer",
+        itemclick: toggleDataSeries
+      },
+      data: [
+        {
+          type: "column",
+          name: "Confirmados",
+          showInLegend: true,      
+          yValueFormatString: "#,##0.# Casos",
+          dataPoints: [{y: data.confirmed, label: 'Confirmados'}]//se le agrega el arreglo
+        },
+        {
+          type: "column",
+          name: "Muertos",
+          showInLegend: true,      
+          yValueFormatString: "#,##0.# Casos",
+          dataPoints: [{y: data.deaths, label: 'Muertos'}]//X2
+        },
+      ] 
+    });
+    chart.render();
+  })
+}
+document.querySelector('#modal').addEventListener('click', (e) => e.target.classList.remove('show'))//cerrar modal
+
 const grafico = () =>{
     fetch(`http://localhost:3000/api/total`)
     .then(response =>{
@@ -14,7 +68,7 @@ const grafico = () =>{
                 y:element.confirmed, label:element.location
             });
             //return confirmed;
-        })//de aqui hasta linea 90, proviene del grafico elegido en canvas.
+        })//de aqui hasta linea 134, proviene del grafico elegido en canvas.
         const muertos = casosConfirmados.map((element) => ({
             y:element.deaths, label:element.location
         }))
@@ -24,7 +78,7 @@ const grafico = () =>{
             <td>${element.location}</td>
             <td>${element.confirmed}</td>
             <td>${element.deaths}</td>
-            <td><button type="button" class="btn btn-warning">Ver detalles</button></td>
+            <td><button type="button" class="btn btn-warning" onclick="mostrarModal('${element.location}')">Ver detalles</button></td>
         </tr>`
         ).join("")
 
@@ -78,20 +132,19 @@ const grafico = () =>{
             }]
         });
         chart.render();
-
-        function toggleDataSeries(e) {
-            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                e.dataSeries.visible = false;
-            }
-            else {
-                e.dataSeries.visible = true;
-            }
-            chart.render();
-        }
+        //aqui se movio el toggleDataSeries para ser utilizado tanto en la grafica como en el modal
     })
 };
 
-
+function toggleDataSeries(e) {
+    if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+        e.dataSeries.visible = false;
+    }
+    else {
+        e.dataSeries.visible = true;
+    }
+    chart.render();
+}
 
 const initPandemia = (async () =>{
     grafico();

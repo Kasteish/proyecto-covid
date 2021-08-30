@@ -57,7 +57,7 @@ const getDataRecovered = async(jwt) =>{
 const graficoChile = (primerDato, segundoDato, tercerDato) =>{
     let confirmedChile = [];
     primerDato.forEach(element => {//forEach: estructura especializada en recorrer elemento indicado o todos los elementos de un array
-        confirmedChile.push({x: new Date(element.date), y:element.total}) //esto proviene de la misma grafica de lineas en canvas
+        confirmedChile.push({x: new Date(element.date), y:element.total}) //el "x" esto proviene de la misma grafica de lineas en canvas
     });
     
     let deathsChile = [];
@@ -70,72 +70,66 @@ const graficoChile = (primerDato, segundoDato, tercerDato) =>{
         recoveredChile.push({x: new Date(element.date), y:element.total})
     });
     
-        
-        var chart = new CanvasJS.Chart("chartContainerChile", {
-            title: {
-                //text: "House Median Price"
-            },
-            axisX: {
-                valueFormatString: "MMM YYYY"
-                /*labelAngle: -30,
-                interval: 1 */ 
-            },
-            axisY2: {
-                title: "Median List Price",
-            },
-            toolTip: {
-                shared: true
-            },
-            legend: {
-                cursor: "pointer",
-                verticalAlign: "top",
-                //horizontalAlign: "center",
-                //dockInsidePlotArea: true,
-                //itemclick: toogleDataSeries
-            },
-            data: [{
-                type:"line",
-                axisYType: "secondary",
-                name: "Casos confirmados",
-                showInLegend: true,
-                markerSize: 0,
-                yValueFormatString: "#,###",
-                dataPoints: confirmedChile
-                
-            },
-            {
-                type: "line",
-                //axisYType: "secondary",
-                name: "Casos Muertos",
-                showInLegend: true,
-                markerSize: 0,
-                yValueFormatString: "#,###",
-                dataPoints: deathsChile
-                
-            },
-            {
-                type: "line",
-                //axisYType: "secondary",
-                name: "Casos Recuperados",
-                showInLegend: true,
-                markerSize: 0,
-                yValueFormatString: "#,###",
-                dataPoints: recoveredChile
-                
-            }]
-        });
-        chart.render();
+    var chart = new CanvasJS.Chart("chartContainerChile", {
+        title: {
+           
+        },
+        axisX: {
+            valueFormatString: "MMM YYYY"
+        },
+        axisY2: {
+            
+           
+        },
+        toolTip: {
+            shared: true
+        },
+        legend: {
+            cursor: "pointer",
+            verticalAlign: "top",
+            horizontalAlign: "center",
+            dockInsidePlotArea: true,
+            itemclick: toogleDataSeries
+        },
+        data: [{
+            type:"line",
+            //axisYType: "secondary",
+            name: "Casos confirmados",
+            showInLegend: true,
+            markerSize: 0,
+            yValueFormatString: "#,###",
+            dataPoints: confirmedChile
+        },
+        {
+            type: "line",
+            axisYType: "secondary",
+            name: "Casos Muertos",
+            showInLegend: true,
+            markerSize: 0,
+            yValueFormatString: "#,###",
+            dataPoints: deathsChile
+        },
+        {
+            type: "line",
+            axisYType: "secondary",
+            name: "Casos Muertos",
+            showInLegend: true,
+            markerSize: 0,
+            yValueFormatString: "#,###",
+            dataPoints: recoveredChile
+        }]
+    });
+    chart.render();
 }
 
-
-/*function toogleDataSeries(e){
+function toogleDataSeries(e){
     if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
         e.dataSeries.visible = false;
     } else{
         e.dataSeries.visible = true;
     }
     chart.render();
-}*/
+}
 
 const initChile = (async () =>{
     const token = localStorage.getItem(`jwt-token`)//del token, para mandar a llamar en del local

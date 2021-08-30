@@ -1,3 +1,52 @@
+/*ciclo vida JWT, sacado de la documentacion, presentacion hito 2
+Para obtener un JTW, debemos usar 3 recursos de la API. Para esto llamamos al JWT
+en el header, con el fin de ingresar a los datos protegidos*/
+const getDataConfirmed = async(jwt) =>{
+    try{//¿? recordar
+        const response = await fetch("http://localhost:3000/api/confirmed", {
+            method:"GET", //para obtener un valor
+            headers:{
+                Authorization: `Bearer ${jwt}`//bearer: ¿?
+            }
+        });
+        const {data} = await response.json();
+        return data;
+    }
+    catch(err){
+        console.log(`Error: ${err}`)
+    }
+}
+const getDataDeaths = async(jwt) =>{
+    try{//¿? recordar
+        const response = await fetch("http://localhost:3000/api/deaths", {
+            method:"GET", //
+            headers:{
+                Authorization: `Bearer ${jwt}`
+            }
+        });
+        const {data} = await response.json();
+        return data;
+    }
+    catch(err){
+        console.log(`Error: ${err}`)
+    }
+}
+const getDataRecovered = async(jwt) =>{
+    try{//¿?
+        const response = await fetch("http://localhost:3000/api/recovered", {
+            method:"GET", //
+            headers:{
+                Authorization: `Bearer ${jwt}`
+            }
+        });
+        const {data} = await response.json();
+        return data;
+    }
+    catch(err){
+        console.log(`Error: ${err}`)
+    }
+}
+
 const graficoChile = (country) =>{
     fetch(`http://localhost:3000/api/countries/${country}`)
     .then(response =>{
@@ -34,50 +83,8 @@ const graficoChile = (country) =>{
                 showInLegend: true,
                 markerSize: 0,
                 yValueFormatString: "#,###",
-                dataPoints: [		
-                    { x: new Date(2014, 00, 01), y: 850 },
-                    { x: new Date(2014, 01, 01), y: 889 },
-                    { x: new Date(2014, 02, 01), y: 890 },
-                    { x: new Date(2014, 03, 01), y: 899 },
-                    { x: new Date(2014, 04, 01), y: 903 },
-                    { x: new Date(2014, 05, 01), y: 925 },
-                    { x: new Date(2014, 06, 01), y: 899 },
-                    { x: new Date(2014, 07, 01), y: 875 },
-                    { x: new Date(2014, 08, 01), y: 927 },
-                    { x: new Date(2014, 09, 01), y: 949 },
-                    { x: new Date(2014, 10, 01), y: 946 },
-                    { x: new Date(2014, 11, 01), y: 927 },
-                    { x: new Date(2015, 00, 01), y: 950 },
-                    { x: new Date(2015, 01, 01), y: 998 },
-                    { x: new Date(2015, 02, 01), y: 998 },
-                    { x: new Date(2015, 03, 01), y: 1050 },
-                    { x: new Date(2015, 04, 01), y: 1050 },
-                    { x: new Date(2015, 05, 01), y: 999 },
-                    { x: new Date(2015, 06, 01), y: 998 },
-                    { x: new Date(2015, 07, 01), y: 998 },
-                    { x: new Date(2015, 08, 01), y: 1050 },
-                    { x: new Date(2015, 09, 01), y: 1070 },
-                    { x: new Date(2015, 10, 01), y: 1050 },
-                    { x: new Date(2015, 11, 01), y: 1050 },
-                    { x: new Date(2016, 00, 01), y: 995 },
-                    { x: new Date(2016, 01, 01), y: 1090 },
-                    { x: new Date(2016, 02, 01), y: 1100 },
-                    { x: new Date(2016, 03, 01), y: 1150 },
-                    { x: new Date(2016, 04, 01), y: 1150 },
-                    { x: new Date(2016, 05, 01), y: 1150 },
-                    { x: new Date(2016, 06, 01), y: 1100 },
-                    { x: new Date(2016, 07, 01), y: 1100 },
-                    { x: new Date(2016, 08, 01), y: 1150 },
-                    { x: new Date(2016, 09, 01), y: 1170 },
-                    { x: new Date(2016, 10, 01), y: 1150 },
-                    { x: new Date(2016, 11, 01), y: 1150 },
-                    { x: new Date(2017, 00, 01), y: 1150 },
-                    { x: new Date(2017, 01, 01), y: 1200 },
-                    { x: new Date(2017, 02, 01), y: 1200 },
-                    { x: new Date(2017, 03, 01), y: 1200 },
-                    { x: new Date(2017, 04, 01), y: 1190 },
-                    { x: new Date(2017, 05, 01), y: 1170 }
-                ]
+                dataPoints: {}
+                
             },
             {
                 type: "line",
@@ -86,61 +93,23 @@ const graficoChile = (country) =>{
                 showInLegend: true,
                 markerSize: 0,
                 yValueFormatString: "#,###",
-                dataPoints: [
-                    { x: new Date(2014, 00, 01), y: 1200 },
-                    { x: new Date(2014, 01, 01), y: 1200 },
-                    { x: new Date(2014, 02, 01), y: 1190 },
-                    { x: new Date(2014, 03, 01), y: 1180 },
-                    { x: new Date(2014, 04, 01), y: 1250 },
-                    { x: new Date(2014, 05, 01), y: 1270 },
-                    { x: new Date(2014, 06, 01), y: 1300 },
-                    { x: new Date(2014, 07, 01), y: 1300 },
-                    { x: new Date(2014, 08, 01), y: 1358 },
-                    { x: new Date(2014, 09, 01), y: 1410 },
-                    { x: new Date(2014, 10, 01), y: 1480 },
-                    { x: new Date(2014, 11, 01), y: 1500 },
-                    { x: new Date(2015, 00, 01), y: 1500 },
-                    { x: new Date(2015, 01, 01), y: 1550 },
-                    { x: new Date(2015, 02, 01), y: 1550 },
-                    { x: new Date(2015, 03, 01), y: 1590 },
-                    { x: new Date(2015, 04, 01), y: 1600 },
-                    { x: new Date(2015, 05, 01), y: 1590 },
-                    { x: new Date(2015, 06, 01), y: 1590 },
-                    { x: new Date(2015, 07, 01), y: 1620 },
-                    { x: new Date(2015, 08, 01), y: 1670 },
-                    { x: new Date(2015, 09, 01), y: 1720 },
-                    { x: new Date(2015, 10, 01), y: 1750 },
-                    { x: new Date(2015, 11, 01), y: 1820 },
-                    { x: new Date(2016, 00, 01), y: 2000 },
-                    { x: new Date(2016, 01, 01), y: 1920 },
-                    { x: new Date(2016, 02, 01), y: 1750 },
-                    { x: new Date(2016, 03, 01), y: 1850 },
-                    { x: new Date(2016, 04, 01), y: 1750 },
-                    { x: new Date(2016, 05, 01), y: 1730 },
-                    { x: new Date(2016, 06, 01), y: 1700 },
-                    { x: new Date(2016, 07, 01), y: 1730 },
-                    { x: new Date(2016, 08, 01), y: 1720 },
-                    { x: new Date(2016, 09, 01), y: 1740 },
-                    { x: new Date(2016, 10, 01), y: 1750 },
-                    { x: new Date(2016, 11, 01), y: 1750 },
-                    { x: new Date(2017, 00, 01), y: 1750 },
-                    { x: new Date(2017, 01, 01), y: 1770 },
-                    { x: new Date(2017, 02, 01), y: 1750 },
-                    { x: new Date(2017, 03, 01), y: 1750 },
-                    { x: new Date(2017, 04, 01), y: 1730 },
-                    { x: new Date(2017, 05, 01), y: 1730 }
-                ]
+                dataPoints: {}
+                
             }]
         });
         chart.render();
-        
-        function toogleDataSeries(e){
-            if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
-                e.dataSeries.visible = false;
-            } else{
-                e.dataSeries.visible = true;
-            }
-            chart.render();
-        }
     })
 }
+
+function toogleDataSeries(e){
+    if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
+        e.dataSeries.visible = false;
+    } else{
+        e.dataSeries.visible = true;
+    }
+    chart.render();
+}
+
+const initChile = (async () =>{
+    graficoChile();
+})();

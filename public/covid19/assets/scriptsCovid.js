@@ -148,8 +148,7 @@ const grafico = () =>{
 function toggleDataSeries(e) {
     if (typeof(e.dataSeries.visible) === "undefined" || e.dataSeries.visible) {
         e.dataSeries.visible = false;
-    }
-    else {
+    }else {
         e.dataSeries.visible = true;
     }
     chart.render();
@@ -157,4 +156,4 @@ function toggleDataSeries(e) {
 
 const initPandemia = (async () =>{
     grafico();
-})();
+})(); //el (); del final no hace autoejecutable

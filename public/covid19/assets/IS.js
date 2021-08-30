@@ -24,17 +24,17 @@ $("#buttonAceptar").click(async() =>{
 /*Evento click, cerrar sesión del navbar, para ocultar esta con situaciones chile
 y mostrar las del inicio correspondientes*/
 $("#cerrarSesion").click(() =>{
-    $("iniciarSesion").toggle();
-    $("situacionChile").toggle();
-    $("cerrarSesion").toggle();
+    $("#iniciarSesion").toggle();
+    $("#situacionChile").toggle();
+    $("#cerrarSesion").toggle();
 
     localStorage.clear(); //elimina los datos alamcenados en el localStorage
     window.location.href = `./public/covid19/indexCovid.html`;
 });
 const toggleNav = () =>{
-    $("iniciarSesion").toggle();
-    $("situacionChile").toggle();
-    $("cerrarSesion").toggle();    
+    $("#iniciarSesion").toggle();
+    $("#situacionChile").toggle();
+    $("#cerrarSesion").toggle();    
 };
 
 /*Esto aparece en la documentacion, presentacion hito 2, de la linea 41 hasta la 52

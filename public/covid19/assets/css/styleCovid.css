@@ -3,6 +3,10 @@
     text-align: center;
 }
 
+#navbarNav{
+    justify-content: flex-end;
+}
+
 body{
     background-color: rgba(223, 247, 247, .3);
 }

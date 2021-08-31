@@ -8,6 +8,7 @@
 }
 
 body{
+    background-image: url('/public/covid19/assets/img/covid_patron_ps.jpg');
     background-color: rgba(223, 247, 247, .3);
 }
 
@@ -53,8 +54,16 @@ h3{
     width: 73%;
 }
 
+thead{
+   background-color: white;
+}
+
+tr{
+    background-color: white;
+}
+
 #tablaDatos tbody tr:hover {
-    background-color: rgba(50,50,50, .4);
+    background-color: rgba(50,50,50, .75);
     color: white;
 }
 

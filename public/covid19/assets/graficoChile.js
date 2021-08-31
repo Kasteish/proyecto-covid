@@ -98,7 +98,7 @@ const graficoChile = (primerDato, segundoDato, tercerDato) =>{
             name: "Casos confirmados",
             showInLegend: true,
             markerSize: 0,
-            yValueFormatString: "#,###",
+            yValueFormatString: "#,### personas",
             dataPoints: confirmedChile
         },
         {
@@ -107,7 +107,7 @@ const graficoChile = (primerDato, segundoDato, tercerDato) =>{
             name: "Casos Muertos",
             showInLegend: true,
             markerSize: 0,
-            yValueFormatString: "#,###",
+            yValueFormatString: "#,### personas",
             dataPoints: deathsChile
         },
         {
@@ -116,7 +116,7 @@ const graficoChile = (primerDato, segundoDato, tercerDato) =>{
             name: "Casos Recuperados",
             showInLegend: true,
             markerSize: 0,
-            yValueFormatString: "#,###",
+            yValueFormatString: "#,### personas",
             dataPoints: recoveredChile
         }]
     });

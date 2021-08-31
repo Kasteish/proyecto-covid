@@ -67,19 +67,20 @@ const graficoChile = (primerDato, segundoDato, tercerDato) =>{
 
     let recoveredChile = [];
     tercerDato.forEach(element => {
-        recoveredChile.push({x: new Date(element.date), y:element.total})
+        if(element.total > 0){//cuando el dato llega a cero, se corta la linea pero no decae
+            recoveredChile.push({x: new Date(element.date), y:element.total})
+        }
     });
     
     var chart = new CanvasJS.Chart("chartContainerChile", {
         title: {
-           
+
         },
         axisX: {
             valueFormatString: "MMM YYYY"
         },
         axisY2: {
-            
-           
+            //title: "Casos Recuperados"  
         },
         toolTip: {
             shared: true
@@ -87,13 +88,13 @@ const graficoChile = (primerDato, segundoDato, tercerDato) =>{
         legend: {
             cursor: "pointer",
             verticalAlign: "top",
-            horizontalAlign: "center",
-            dockInsidePlotArea: true,
+            //horizontalAlign: "center",
+            //dockInsidePlotArea: true,
             itemclick: toogleDataSeries
         },
         data: [{
             type:"line",
-            //axisYType: "secondary",
+            axisYType: "primary",
             name: "Casos confirmados",
             showInLegend: true,
             markerSize: 0,
@@ -111,8 +112,8 @@ const graficoChile = (primerDato, segundoDato, tercerDato) =>{
         },
         {
             type: "line",
-            axisYType: "secondary",
-            name: "Casos Muertos",
+            axisYType: "primary",
+            name: "Casos Recuperados",
             showInLegend: true,
             markerSize: 0,
             yValueFormatString: "#,###",
@@ -134,7 +135,7 @@ function toogleDataSeries(e){
 const initChile = (async () =>{
     const token = localStorage.getItem(`jwt-token`)//del token, para mandar a llamar en del local
     const confirmadosChile = await getDataConfirmed(token); // await: utilizado para esperar una promesa de la funcion asincronica
-    const muertesChile = await getDataConfirmed(token);
-    const recuperadosChile = await getDataConfirmed(token);
+    const muertesChile = await getDataDeaths(token);
+    const recuperadosChile = await getDataRecovered(token);
     graficoChile(confirmadosChile, muertesChile, recuperadosChile);
 })();

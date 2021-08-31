@@ -11,6 +11,13 @@ body{
     background-color: rgba(223, 247, 247, .3);
 }
 
+.bodyChile{
+    background-image: url('/public/covid19/assets/img/onu_map.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: rgba(223, 247, 247, .3);
+}
+
 .interaaciones{
     float: inline-end;
 }

@@ -9,14 +9,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Courier+Prime:ital@1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css">
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="./assets/img/covid_icon.png" type="image/x-icon">
     <link rel="stylesheet" href="./assets/css/styleCovid.css">
     <title>Situacion Chile - COVID19</title>
 </head>
-<body>
+<body class="bodyChile">
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <i class="fas fa-virus"></i>
-    <a class="navbar-brand covin" href="#">Covid19</a>
+    <div>
+      <i class="fas fa-head-side-mask" style="color: white;"></i>
+      <a class="navbar-brand covin" href="#">Covid19</a>
+    </div>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
@@ -35,14 +37,15 @@
     </div>
    </nav>
   <div class="container">
-    <h2 class="tituloCovidChile">Estadistica númerica de COVID19 en Chile</h2>
+    <h2 class="tituloCovidChile"><mark>Estadistica númerica de COVID19 en Chile</mark></h2>
     <div id="chartContainerChile" style="height: 527px; width: 100%;"></div><!--del grafico linea, en canvas-->
   </div>
    
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>      
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script src="https://kit.fontawesome.com/27cce06286.js" crossorigin="anonymous"></script>      
 <script src="./assets/IS.js"></script>
 <script src="./assets/graficoChile.js"></script>
    

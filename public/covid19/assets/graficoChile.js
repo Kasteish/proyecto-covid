@@ -120,6 +120,7 @@ const graficoChile = (primerDato, segundoDato, tercerDato) =>{
             dataPoints: recoveredChile
         }]
     });
+    document.querySelector("#loader").style.display="none";//se le da el estilo que se oculte cuando se visualice el grafico
     chart.render();
 }
 

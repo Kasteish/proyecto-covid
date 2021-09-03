@@ -8,55 +8,59 @@ const mostrarModal = (pais) => {
     })
     .then(function(myJson){
         let { data } = myJson;
-
-        var chart = new CanvasJS.Chart("contenidoDelModal", {
-        //exportEnabled: true,
-        animationEnabled: true,
-        title:{
-        text:`Datos de ${data.location}`
-      },
-      axisY: {
-        //title: "Personas",
-        titleFontColor: "#4F81BC",
-        lineColor: "#4F81BC",
-        labelFontColor: "#4F81BC",
-        tickColor: "#4F81BC",
-        includeZero: true
-      },
-      axisY2: {
-        //title: "Casos muertos",
-        titleFontColor: "#C0504E",
-        lineColor: "#C0504E",
-        labelFontColor: "#C0504E",
-        tickColor: "#C0504E"
-    },
-      toolTip: {
-        shared: true
-      },
-      legend: {
-        cursor: "pointer",
-        verticalAlign: "top",
-        itemclick: toggleDataSeries
-      },
-      data: [
-        {
-          type: "column",
-          name: "Casos Confirmados",
-          showInLegend: true,      
-          yValueFormatString: "#,##0.# Casos",
-          dataPoints: [{y: data.confirmed, label: 'Confirmados'}]//se le agrega el arreglo
-        },
-        {
-          type: "column",
-          name: "Casos Muertos",
-          showInLegend: true,      
-          yValueFormatString: "#,##0.# Casos",
-          axisYType: "secondary",
-          dataPoints: [{y: data.deaths, label: 'Muertos'}]//X2
-        },
-      ] 
-    });
-    chart.render();
+        if(Object.keys(data).length > 0){
+            var chart = new CanvasJS.Chart("contenidoDelModal", {
+                //exportEnabled: true,
+                animationEnabled: true,
+                title:{
+                text:`Datos de ${data.location}`
+              },
+              axisY: {
+                //title: "Personas",
+                titleFontColor: "#4F81BC",
+                lineColor: "#4F81BC",
+                labelFontColor: "#4F81BC",
+                tickColor: "#4F81BC",
+                includeZero: true
+              },
+              axisY2: {
+                //title: "Casos muertos",
+                titleFontColor: "#C0504E",
+                lineColor: "#C0504E",
+                labelFontColor: "#C0504E",
+                tickColor: "#C0504E"
+            },
+              toolTip: {
+                shared: true
+              },
+              legend: {
+                cursor: "pointer",
+                verticalAlign: "top",
+                itemclick: toggleDataSeries
+              },
+              data: [
+                {
+                  type: "column",
+                  name: "Casos Confirmados",
+                  showInLegend: true,      
+                  yValueFormatString: "#,##0.# Casos",
+                  dataPoints: [{y: data.confirmed, label: 'Confirmados'}]//se le agrega el arreglo
+                },
+                {
+                  type: "column",
+                  name: "Casos Muertos",
+                  showInLegend: true,      
+                  yValueFormatString: "#,##0.# Casos",
+                  axisYType: "secondary",
+                  dataPoints: [{y: data.deaths, label: 'Muertos'}]//X2
+                },
+              ] 
+            });
+            chart.render();
+        }else{
+            const modal = document.querySelector("#contenidoDelModal");
+            modal.innerHTML= `<img src= './assets/img/no data_75porcent.jpg'>`
+        }      
   })
 }
 document.querySelector('#modal').addEventListener('click', (e) => e.target.classList.remove('show'))//cerrar modal

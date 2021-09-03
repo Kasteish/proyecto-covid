@@ -88,3 +88,8 @@ tr{
     margin: 2rem auto;
     border-radius: 1rem;
 }
+
+#contenidoDelModal img{
+    justify-content: center;
+    width: 65%;
+}
